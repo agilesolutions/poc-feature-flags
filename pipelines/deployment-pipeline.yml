@@ -5,6 +5,8 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
+  serviceName: 'poc-feature-flags'
+  path: './$(serviceName)'
   dockerRegistryServiceConnection: 'dockerhub' # name of ACR service connection
   imageRepository: 'agilesolutions/feature-flags' # name of image repository
   containerRegistry: 'Docker Hub' # name of Azure container registry
