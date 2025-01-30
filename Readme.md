@@ -33,3 +33,6 @@ kubectl top node aks-agentpool-14651446-vmss000000
 az group delete --name aks-cluster-template_rg001
 ```
 
+## references
+- [Azure feature flags with Spring Boot app](https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-feature-flag-spring-boot?tabs=entra-id)
+- [Tutorial feature flags in Spring Boot](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-spring-boot?tabs=spring-boot-3)
