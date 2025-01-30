@@ -20,13 +20,6 @@ stages:
       vmImage: ubuntu-latest
     steps:
 
-    - task: JavaToolInstaller@0
-      displayName: 'user preinstalled jdk'
-      inputs:
-        versionSpec: '11'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'Preinstalled'
-
     - task: Cache@2
       displayName: configure gradle caching
       continueOnError: true
