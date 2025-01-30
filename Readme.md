@@ -27,3 +27,9 @@ kubectl describe node
 kubectl top node aks-agentpool-14651446-vmss000000
 ```
 
+## cleanup
+
+```
+az group delete --name aks-cluster-template_rg001
+```
+
