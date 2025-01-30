@@ -27,6 +27,11 @@ kubectl describe node
 kubectl top node aks-agentpool-14651446-vmss000000
 ```
 
+## Create a feature flag
+```
+az appconfig feature set --name poc-feature-flag --feature Beta
+```
+
 ## cleanup
 
 ```

@@ -20,6 +20,8 @@ public class HelloWorldController {
 
     private final HealthService healthService;
 
+    private final FeatureManager featureManager;
+
     @Autowired(required = false)
     @Qualifier("podInfoLabels")
     private Properties podInfoLabels;
