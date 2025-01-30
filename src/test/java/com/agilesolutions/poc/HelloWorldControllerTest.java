@@ -1,6 +1,6 @@
 package com.agilesolutions.poc;
 
-import com.agilesolutions.demo.rest.HelloWorldController;
+import com.agilesolutions.poc.rest.HelloWorldController;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

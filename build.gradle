@@ -71,34 +71,6 @@ bootJar {
 
 }
 
-task dockerBuild(type: Exec) {
-    commandLine 'docker', 'build', '-t', "agilesolutions/k8sdemo:${version}", '.'
-}
-
-task dockerPush(type: Exec) {
-    commandLine 'docker', 'push', "agilesolutions/k8sdemo:${version}"
-}
-
-task helmDeploy {
-    group = "helm"
-    description = "Update Helm chart with the specified image tag"
-
-    doLast {
-        def helmCommand = "helm upgrade --install demo-release build/demo " +
-                "--set image.tag=${version}"
-
-        def process = helmCommand.execute()
-        process.in.eachLine { line -> println line }
-        process.err.eachLine { line -> System.err.println line }
-        process.waitFor()
-
-    }
-}
-
 task release(type: GradleBuild) {
-    tasks = ['clean', 'build', 'dockerBuild', 'generateHelmChart', 'helmDeploy']
+    tasks = ['clean', 'build']
 }
-test.dependsOn generateHelmChart
-compileTestJava.dependsOn generateHelmChart
-generateHelmChart.dependsOn bootJar, jar
-
