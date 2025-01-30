@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feature-flags-deployment
+  labels:
+    app: feature-flags
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: feature-flags
+  template:
+    metadata:
+      labels:
+        app: feature-flags
+    spec:
+      containers:
+        - name: feature-flags
+          image: agilesolutions/feature-flags
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: feature-flags-loadbalancer-service
+  labels:
+    app: feature-flags
+spec:
+  type: LoadBalancer
+  selector:
+    app: feature-flags
+  ports:
+    - port: 80
+      targetPort: 80
+
+
+

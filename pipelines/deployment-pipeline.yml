@@ -1,0 +1,33 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  dockerRegistryServiceConnection: 'dockerhub' # name of ACR service connection
+  imageRepository: 'agilesolutions/feature-flags' # name of image repository
+  containerRegistry: 'Docker Hub' # name of Azure container registry
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build and push image
+      inputs:
+        containerRegistry: $(dockerRegistryServiceConnection)
+        repository: $(imageRepository)
+        command: buildAndPush
+        Dockerfile: Dockerfile
+        tags: |
+          $(tag)
+
+    - publish: manifests
+      artifact: manifests
