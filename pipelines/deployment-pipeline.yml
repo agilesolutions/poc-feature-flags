@@ -22,28 +22,28 @@ stages:
       vmImage: ubuntu-latest
     steps:
 
-    - task: Cache@2
-      displayName: configure gradle caching
-      continueOnError: true
-      inputs:
-        key: 'gradle | "$(Agent.OS)" $(path)/build.gradle'
-        restoreKeys: |
-          gradle | "$(Agent.OS)"
-          gradle
-        path: '$(Pipeline.Workspace)/.gradle'
+#    - task: Cache@2
+#      displayName: configure gradle caching
+#      continueOnError: true
+#      inputs:
+#        key: 'gradle | "$(Agent.OS)" $(path)/build.gradle'
+#        restoreKeys: |
+#          gradle | "$(Agent.OS)"
+#          gradle
+#        path: '$(Pipeline.Workspace)/.gradle'
 
-    - task: Gradle@3
-      inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
-        gradleWrapperFile: 'gradlew'
-        gradleOptions: '-Xmx3072m'
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: 'default'
-        jdkArchitectureOption: 'x64'
-        publishJUnitResults: true
-        testResultsFiles: '**/TEST-*.xml'
-        tasks: 'build'
-        sonarQubeRunAnalysis: false 
+#    - task: Gradle@3
+#      inputs:
+#        workingDirectory: '$(System.DefaultWorkingDirectory)'
+#        gradleWrapperFile: 'gradlew'
+#        gradleOptions: '-Xmx3072m'
+#        javaHomeOption: 'JDKVersion'
+#        jdkVersionOption: 'default'
+#        jdkArchitectureOption: 'x64'
+#        publishJUnitResults: true
+#        testResultsFiles: '**/TEST-*.xml'
+#        tasks: 'build'
+#        sonarQubeRunAnalysis: false
 
     - task: Docker@2
       displayName: Build and push image
