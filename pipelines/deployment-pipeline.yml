@@ -32,11 +32,11 @@ stages:
           gradle
         path: '$(Pipeline.Workspace)/.gradle'
 
-    - task: Gradle@2
+    - task: Gradle@3
       displayName: 'build service'
       inputs:
-        gradleWrapperFile: '$(path)/gradlew'
-        workingDirectory: '$(path)'
+        gradleWrapperFile: 'gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)'
         options: '--no-daemon'
         tasks: '--info build -x test'
 
