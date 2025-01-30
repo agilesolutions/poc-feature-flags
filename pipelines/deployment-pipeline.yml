@@ -52,6 +52,10 @@ stages:
                   displayName: Create imagePullSecret
                   inputs:
                     action: createSecret
+                    connectionType: 'azureResourceManager'
+                    azureSubscriptionConnection: 'aks-feature-flag-sc'
+                    azureResourceGroup: 'aks-cluster-template_rg001'
+                    kubernetesCluster: 'aks101cluster'
                     secretName: $(imagePullSecret)
                     dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
@@ -59,6 +63,10 @@ stages:
                   displayName: Deploy to Kubernetes cluster
                   inputs:
                     action: deploy
+                    connectionType: 'azureResourceManager'
+                    azureSubscriptionConnection: 'aks-feature-flag-sc'
+                    azureResourceGroup: 'aks-cluster-template_rg001'
+                    kubernetesCluster: 'aks101cluster'
                     manifests: |
                       $(Pipeline.Workspace)/manifests/Deployment-and-LoadBalancer-Service.yml
                     imagePullSecrets: |
