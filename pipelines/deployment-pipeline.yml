@@ -38,7 +38,7 @@ stages:
         gradleWrapperFile: 'gradlew'
         workingDirectory: '$(Build.SourcesDirectory)'
         options: '--no-daemon'
-        tasks: '--info build -x test'
+        tasks: '--info build -x test -x sonar'
 
     - task: Docker@2
       displayName: Build and push image
