@@ -1,59 +1,33 @@
 trigger:
-- master
+  - main
 
 pool:
   vmImage: ubuntu-latest
 
 variables:
-  serviceName: 'poc-feature-flags'
-  path: './$(serviceName)'
   dockerRegistryServiceConnection: 'dockerhub' # name of ACR service connection
   imageRepository: 'agilesolutions/feature-flags' # name of image repository
   containerRegistry: 'Docker Hub' # name of Azure container registry
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
+  - stage: Build
+    displayName: Build stage
+    jobs:
+      - job: Build
+        displayName: Build
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: Docker@2
+            displayName: Build and push image
+            inputs:
+              containerRegistry: $(dockerRegistryServiceConnection)
+              repository: $(imageRepository)
+              command: buildAndPush
+              Dockerfile: Dockerfile
+              tags: |
+                $(tag)
 
-#    - task: Cache@2
-#      displayName: configure gradle caching
-#      continueOnError: true
-#      inputs:
-#        key: 'gradle | "$(Agent.OS)" $(path)/build.gradle'
-#        restoreKeys: |
-#          gradle | "$(Agent.OS)"
-#          gradle
-#        path: '$(Pipeline.Workspace)/.gradle'
-
-#    - task: Gradle@3
-#      inputs:
-#        workingDirectory: '$(System.DefaultWorkingDirectory)'
-#        gradleWrapperFile: 'gradlew'
-#        gradleOptions: '-Xmx3072m'
-#        javaHomeOption: 'JDKVersion'
-#        jdkVersionOption: 'default'
-#        jdkArchitectureOption: 'x64'
-#        publishJUnitResults: true
-#        testResultsFiles: '**/TEST-*.xml'
-#        tasks: 'build'
-#        sonarQubeRunAnalysis: false
-
-    - task: Docker@2
-      displayName: Build and push image
-      inputs:
-        containerRegistry: $(dockerRegistryServiceConnection)
-        repository: $(imageRepository)
-        command: buildAndPush
-        Dockerfile: Dockerfile
-        tags: |
-          $(tag)
-
-    - publish: manifests
-      artifact: manifests
+          - publish: manifests
+            artifact: manifests
