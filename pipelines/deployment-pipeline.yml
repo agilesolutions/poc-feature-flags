@@ -1,5 +1,5 @@
 trigger:
-- main
+- master
 
 pool:
   vmImage: ubuntu-latest
@@ -15,7 +15,7 @@ variables:
 stages:
 - stage: Build
   displayName: Build stage
-  jobs:  
+  jobs:
   - job: Build
     displayName: Build
     pool:
