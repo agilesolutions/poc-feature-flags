@@ -19,6 +19,32 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+
+    - task: JavaToolInstaller@0
+      displayName: 'user preinstalled jdk'
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'Preinstalled'
+
+    - task: Cache@2
+      displayName: configure gradle caching
+      continueOnError: true
+      inputs:
+        key: 'gradle | "$(Agent.OS)" $(path)/build.gradle'
+        restoreKeys: |
+          gradle | "$(Agent.OS)"
+          gradle
+        path: '$(Pipeline.Workspace)/.gradle'
+
+    - task: Gradle@2
+      displayName: 'build service'
+      inputs:
+        gradleWrapperFile: '$(path)/gradlew'
+        workingDirectory: '$(path)'
+        options: '--no-daemon'
+        tasks: '--info build -x test'
+
     - task: Docker@2
       displayName: Build and push image
       inputs:
