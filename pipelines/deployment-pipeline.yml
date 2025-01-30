@@ -8,7 +8,9 @@ variables:
   dockerRegistryServiceConnection: 'dockerhub' # name of ACR service connection
   imageRepository: 'agilesolutions/feature-flags' # name of image repository
   containerRegistry: 'Docker Hub' # name of Azure container registry
+  imagePullSecret: 'github-auth'
   tag: '$(Build.BuildId)'
+  vmImageName: 'ubuntu-latest'
 
 stages:
   - stage: Build
@@ -17,7 +19,7 @@ stages:
       - job: Build
         displayName: Build
         pool:
-          vmImage: ubuntu-latest
+          vmImage: $(vmImageName)
         steps:
           - task: Docker@2
             displayName: Build and push image
@@ -31,3 +33,35 @@ stages:
 
           - publish: manifests
             artifact: manifests
+
+  - stage: Deploy
+    displayName: Deploy stage
+    dependsOn: Build
+
+    jobs:
+      - deployment: Deploy
+        displayName: Deploy
+        pool:
+          vmImage: $(vmImageName)
+        environment: 'feature-flags'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: KubernetesManifest@0
+                  displayName: Create imagePullSecret
+                  inputs:
+                    action: createSecret
+                    secretName: $(imagePullSecret)
+                    dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+
+                - task: KubernetesManifest@0
+                  displayName: Deploy to Kubernetes cluster
+                  inputs:
+                    action: deploy
+                    manifests: |
+                      $(Pipeline.Workspace)/manifests/Deployment-and-LoadBalancer-Service.yml
+                    imagePullSecrets: |
+                      $(imagePullSecret)
+                    containers: |
+                      $(containerRegistry)/$(imageRepository):$(tag)
