@@ -54,7 +54,7 @@ task generateHelmChart(type: Copy) {
 
 bootJar {
 
-    archiveFileName = 'application.jar'
+    archiveFileName = './application.jar'
 
     manifest{
         attributes(
