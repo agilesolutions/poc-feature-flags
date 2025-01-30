@@ -32,9 +32,9 @@ stages:
           gradle
         path: '$(Pipeline.Workspace)/.gradle'
 
-    - task: Gradle@2
+    - task: Gradle@3
       inputs:
-        workingDirectory: ''
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
         gradleWrapperFile: 'gradlew'
         gradleOptions: '-Xmx3072m'
         javaHomeOption: 'JDKVersion'
@@ -43,6 +43,7 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/TEST-*.xml'
         tasks: 'build'
+        sonarQubeRunAnalysis: false 
 
     - task: Docker@2
       displayName: Build and push image
