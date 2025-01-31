@@ -21,12 +21,6 @@ stages:
         pool:
           vmImage: $(vmImageName)
         steps:
-          - task: JavaToolInstaller@0
-            displayName: 'user preinstalled jdk'
-            inputs:
-              versionSpec: '17'
-              jdkArchitectureOption: 'x64'
-              jdkSourceOption: 'Preinstalled'
 
           - task: Cache@2
             displayName: configure gradle caching
