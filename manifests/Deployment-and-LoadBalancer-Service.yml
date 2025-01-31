@@ -19,8 +19,6 @@ spec:
           image: agilesolutions/feature-flags
           ports:
             - containerPort: 80
-          imagePullSecrets:
-            - name: my-acr-secret
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -54,6 +52,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['app']
+      imagePullSecrets:
+        - name: my-acr-secret
       volumes:
         - name: podinfo
           downwardAPI:
