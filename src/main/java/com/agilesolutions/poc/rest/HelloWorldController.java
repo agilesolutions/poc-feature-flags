@@ -1,7 +1,6 @@
 package com.agilesolutions.poc.rest;
 
 import com.agilesolutions.poc.service.HealthService;
-import com.azure.spring.cloud.feature.management.FeatureManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
