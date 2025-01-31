@@ -28,8 +28,7 @@ stages:
               repository: $(imageRepository)
               command: buildAndPush
               Dockerfile: Dockerfile
-              tags: |
-                $(tag)
+              tags: latest
 
           - publish: manifests
             artifact: manifests
