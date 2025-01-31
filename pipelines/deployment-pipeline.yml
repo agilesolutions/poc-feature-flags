@@ -56,7 +56,7 @@ stages:
                     azureSubscriptionConnection: 'aks-feature-flag-sc'
                     azureResourceGroup: 'aks-cluster-template_rg001'
                     kubernetesCluster: 'aks101cluster'
-                    secretName: $(imagePullSecret)
+                    secretName: 'my-acr-secret'
                     dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
                 - task: KubernetesManifest@0
@@ -67,9 +67,6 @@ stages:
                     azureSubscriptionConnection: 'aks-feature-flag-sc'
                     azureResourceGroup: 'aks-cluster-template_rg001'
                     kubernetesCluster: 'aks101cluster'
-                    manifests: |
-                      $(Pipeline.Workspace)/manifests/Deployment-and-LoadBalancer-Service.yml
-                    imagePullSecrets: |
-                      $(imagePullSecret)
-                    containers: |
-                      $(containerRegistry)/$(imageRepository):$(tag)
+                    manifests: $(Pipeline.Workspace)/manifests/Deployment-and-LoadBalancer-Service.yml
+                    imagePullSecrets: 'my-acr-secret'
+                    containers: $(containerRegistry)/$(imageRepository):$(tag)

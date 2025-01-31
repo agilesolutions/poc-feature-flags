@@ -19,6 +19,8 @@ spec:
           image: agilesolutions/feature-flags
           ports:
             - containerPort: 80
+          imagePullSecrets:
+            - name: my-acr-secret
           livenessProbe:
             httpGet:
               path: /actuator/health
