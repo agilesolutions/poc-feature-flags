@@ -21,11 +21,18 @@ stages:
         pool:
           vmImage: $(vmImageName)
         steps:
+          - task: JavaToolInstaller@0
+            displayName: 'user preinstalled jdk'
+            inputs:
+              versionSpec: '17'
+              jdkArchitectureOption: 'x64'
+              jdkSourceOption: 'Preinstalled'
+
           - task: Cache@2
             displayName: configure gradle caching
             continueOnError: true
             inputs:
-              key: 'gradle | "$(Agent.OS)" $(path)/build.gradle'
+              key: 'gradle | "$(Agent.OS)" $(Pipeline.Workspace)/build.gradle'
               restoreKeys: |
                 gradle | "$(Agent.OS)"
                 gradle
