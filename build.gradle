@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.agilesolutions'
 version = '1.0.27'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 ext {
     commit = commit()
