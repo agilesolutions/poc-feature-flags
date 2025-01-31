@@ -21,6 +21,24 @@ stages:
         pool:
           vmImage: $(vmImageName)
         steps:
+          - task: Cache@2
+            displayName: configure gradle caching
+            continueOnError: true
+            inputs:
+              key: 'gradle | "$(Agent.OS)" $(path)/build.gradle'
+              restoreKeys: |
+                gradle | "$(Agent.OS)"
+                gradle
+              path: '$(Pipeline.Workspace)/.gradle'
+
+          - task: Gradle@2
+            displayName: 'build service'
+            inputs:
+              gradleWrapperFile: 'gradlew'
+              workingDirectory: ''
+              gradleOptions: '-Dorg.gradle.daemon=false'
+              tasks: '--info build -x test'
+
           - task: Docker@2
             displayName: Build and push image
             inputs:
