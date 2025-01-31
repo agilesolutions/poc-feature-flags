@@ -1,6 +1,7 @@
 package com.agilesolutions.poc.rest;
 
 import com.agilesolutions.poc.service.HealthService;
+import com.azure.spring.cloud.feature.management.FeatureManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +27,8 @@ public class HelloWorldController {
     @Qualifier("podInfoLabels")
     private Properties podInfoLabels;
 
-    @Autowired (required = false)
-    @Qualifier ("podInfoAnnotations")
-    private Properties podInfoAnnotations;
-
-    @Value("${MYSQL_USERNAME}")
-    private String username;
-
-    @Value("${MYSQL_PASSWORD}")
-    private String password;
-
-    @Value("${LABEL}")
-    private String label;
+    @Value("${APP_CONFIGURATION_CONNECTION_STRING}")
+    private String connectionString;
 
 
     @GetMapping("/hello")
@@ -47,7 +38,7 @@ public class HelloWorldController {
 
         log.info("**** deployment {}",deploymentVersion);
 
-        return format("Deployment version %s and Username %s and password %s and finally downWard label %s", deploymentVersion, username, password, label);
+        return format("Deployment version %s and connection string %s and finally downWard label %s", deploymentVersion, connectionString);
     }
 
     @GetMapping("/unhealthy")

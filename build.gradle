@@ -24,8 +24,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-logging'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'com.azure.spring:spring-cloud-azure-feature-management-web:5.13.0'
+    implementation 'com.azure.spring:spring-cloud-azure-appconfiguration-config-web:5.13.0'
     implementation 'org.slf4j:slf4j-api:2.0.13'
-    compileOnly 'org.projectlombok:lombok:1.18.34'
+    implementation 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
