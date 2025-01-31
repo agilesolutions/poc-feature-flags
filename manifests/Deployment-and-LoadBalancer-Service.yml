@@ -48,34 +48,20 @@ spec:
             - name: podinfo
               mountPath: /etc/podinfo
               readOnly: false
-            - name: secrets-store
-              mountPath: "/mnt/secrets"
-              readOnly: true
           env:
-            - name: APP_CONFIGURATION_CONNECTION_STRING
-              valueFrom:
-                secretKeyRef:
-                  name: connection-string-secret
-                  key: username
             - name: LABEL
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['app']
 volumes:
-- name: secrets-store
-  csi:
-    driver: secrets-store.csi.k8s.io
-    readOnly: true
-    volumeAttributes:
-      secretProviderClass: "azure-keyvault-secret-provider"
-- name: podinfo
-  downwardAPI:
-     items:
-       - path: "labels"
-         fieldRef:
-           fieldPath: metadata.labels
-       - path: "annotations"
-         fieldRef:
+  - name: podinfo
+    downwardAPI:
+       items:
+         - path: "labels"
+           fieldRef:
+             fieldPath: metadata.labels
+         - path: "annotations"
+           fieldRef:
            fieldPath: metadata.annotations
 ---
 apiVersion: v1
@@ -91,33 +77,3 @@ spec:
   ports:
     - port: 80
       targetPort: 80
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: connection-string-secret
-type: Opaque
-data:
-  MY_SECRET_VALUE: bXlTZWNyZXRWYWx1ZQ== # Base64 encoded value
----
-apiVersion: secrets-store.csi.x-k8s.io/v1
-kind: SecretProviderClass
-metadata:
-  name: azure-keyvault-secret-provider
-spec:
-  provider: azure
-  parameters:
-    usePodIdentity: "false"
-    clientID: "<your-client-id>" # Only needed for Service Principal
-    keyvaultName: "<your-keyvault-name>"
-    objects: |
-      array:
-        - objectName: "my-secret-key"
-          objectType: "secret"
-    tenantId: "<your-tenant-id>"
-  secretObjects:
-    - secretName: my-k8s-secret
-      type: Opaque
-      data:
-        - objectName: "my-secret-key"
-          key: "MY_SECRET_VALUE"

@@ -1,11 +1,2 @@
 server:
   port: 80
-
-spring:
-  cloud:
-    azure:
-      appconfiguration:
-        stores[0]:
-          feature-flags:
-            enabled: 'true'
-          connection-string: ${APP_CONFIGURATION_CONNECTION_STRING}

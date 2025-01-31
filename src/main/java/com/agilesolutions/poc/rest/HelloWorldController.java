@@ -38,7 +38,9 @@ public class HelloWorldController {
 
         log.info("**** deployment {}",deploymentVersion);
 
-        return format("Deployment version %s and connection string %s and finally downWard label %s", deploymentVersion, connectionString);
+        featureManager.getAllFeatureNames().forEach(f -> log.info("*** feature {}", f));
+
+        return format("Deployment version %s and connection string %s and finally feature flag enabled %s", deploymentVersion, connectionString, featureManager.isEnabledAsync("Beta").block());
     }
 
     @GetMapping("/unhealthy")
