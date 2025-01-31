@@ -21,7 +21,7 @@ public class HelloWorldController {
 
     private final HealthService healthService;
 
-    private final FeatureManager featureManager;
+    //private final FeatureManager featureManager;
 
     @Autowired(required = false)
     @Qualifier("podInfoLabels")
@@ -38,9 +38,9 @@ public class HelloWorldController {
 
         log.info("**** deployment {}",deploymentVersion);
 
-        featureManager.getAllFeatureNames().forEach(f -> log.info("*** feature {}", f));
+        //featureManager.getAllFeatureNames().forEach(f -> log.info("*** feature {}", f));
 
-        return format("Deployment version %s and connection string %s and finally feature flag enabled %s", deploymentVersion, connectionString, featureManager.isEnabledAsync("Beta").block());
+        return format("Deployment version %s and connection string %s and finally feature flag enabled %s", deploymentVersion, connectionString,  "no");
     }
 
     @GetMapping("/unhealthy")
