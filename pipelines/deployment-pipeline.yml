@@ -21,6 +21,10 @@ stages:
         pool:
           vmImage: $(vmImageName)
         steps:
+          - task: UseJavaVersion@1
+            inputs:
+              version: '17'
+              architecture: 'x64'
 
           - task: Cache@2
             displayName: configure gradle caching
