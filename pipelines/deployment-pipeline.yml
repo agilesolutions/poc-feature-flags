@@ -27,6 +27,9 @@ stages:
               jdkArchitectureOption: 'x64'
               jdkSourceOption: 'PreInstalled'
 
+          - script: echo "Setting JAVA_HOME to JDK 17 location."
+            displayName: 'Set JAVA_HOME to JDK 17'
+
           - task: Cache@2
             displayName: configure gradle caching
             continueOnError: true
