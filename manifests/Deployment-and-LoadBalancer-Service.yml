@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: feature-flags
-          image: agilesolutions/feature-flags:$(Build.BuildId)
+          image: agilesolutions/feature-flags:$(tag)
           ports:
             - containerPort: 80
           livenessProbe:
