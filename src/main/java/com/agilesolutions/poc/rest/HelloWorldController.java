@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,15 +19,9 @@ public class HelloWorldController {
 
     private final HealthService healthService;
 
-    //private final FeatureManager featureManager;
-
     @Autowired(required = false)
     @Qualifier("podInfoLabels")
     private Properties podInfoLabels;
-
-    @Value("${APP_CONFIGURATION_CONNECTION_STRING}")
-    private String connectionString;
-
 
     @GetMapping("/hello")
     public String sayHello() {
@@ -37,9 +30,7 @@ public class HelloWorldController {
 
         log.info("**** deployment {}",deploymentVersion);
 
-        //featureManager.getAllFeatureNames().forEach(f -> log.info("*** feature {}", f));
-
-        return format("Deployment version %s and connection string %s and finally feature flag enabled %s", deploymentVersion, connectionString,  "no");
+        return format("Deployment version %s", deploymentVersion);
     }
 
     @GetMapping("/unhealthy")
