@@ -1,11 +1,11 @@
-package com.agilesolutions.demo;
+package com.agilesolutions.poc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class PocApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(PocApplication.class, args);
     }
 }

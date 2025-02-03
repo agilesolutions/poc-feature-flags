@@ -134,8 +134,10 @@ spec:
         secretProviderClass: "azure-keyvault-secret-provider"
 
 ```
-### 
-
+### run pipeline to gradle build, docker build and push and kubectl apply deploy and service manifests
+- Test loadbalancer external IP endpionts
+  - http://130.131.168.254/actuator/health
+  - 
 ```
 
 ```
