@@ -96,4 +96,4 @@ stages:
                     kubernetesCluster: 'aks101cluster'
                     manifests: $(Pipeline.Workspace)/manifests/Deployment-and-LoadBalancer-Service.yml
                     imagePullSecrets: 'my-acr-secret'
-                    containers: $(containerRegistry)/$(imageRepository):$(tag)
+                    containers: $(imageRepository):$(tag)
