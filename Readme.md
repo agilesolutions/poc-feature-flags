@@ -179,4 +179,4 @@ az group delete --name aks-cluster-template_rg001
 - [Java Spring app with Azure App Configuration](https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-java-spring-app)
 - [Use dynamic configuration in a Java Spring app](https://learn.microsoft.com/en-us/azure/azure-app-configuration/enable-dynamic-configuration-java-spring-app)
 - [Graceful Shutdown of Spring Boot Applications in Kubernetes](https://medium.com/trendyol-tech/graceful-shutdown-of-spring-boot-applications-in-kubernetes-f80e0b3a30b0)
-- []()
+- [Spring Cloud Azure resource handling](https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/resource-handling)
