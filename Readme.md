@@ -37,7 +37,7 @@ az appconfig feature disable -n poc-app-config001 --feature Beta
 az appconfig credential list --name poc-app-config001 --query "[?name=='Primary'].connectionString" --output tsv
 ```
 
-## Add Key-Value Pairs to App Configuration to test dynamic configuration on Spring Boot apps
+## Add Key-Value Pairs to App Configuration to test dynamic push configuration on Spring Boot apps
 ```
 az appconfig kv set -n poc-app-config001 --key sentinel --value "1"
 az appconfig kv set -n poc-app-config001 --key /application/config.message --value "hello"
