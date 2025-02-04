@@ -176,3 +176,7 @@ az group delete --name aks-cluster-template_rg001
 ## references
 - [Azure feature flags with Spring Boot app](https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-feature-flag-spring-boot?tabs=entra-id)
 - [Tutorial feature flags in Spring Boot](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-spring-boot?tabs=spring-boot-3)
+- [Java Spring app with Azure App Configuration](https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-java-spring-app)
+- [Use dynamic configuration in a Java Spring app](https://learn.microsoft.com/en-us/azure/azure-app-configuration/enable-dynamic-configuration-java-spring-app)
+- [Graceful Shutdown of Spring Boot Applications in Kubernetes](https://medium.com/trendyol-tech/graceful-shutdown-of-spring-boot-applications-in-kubernetes-f80e0b3a30b0)
+- []()
