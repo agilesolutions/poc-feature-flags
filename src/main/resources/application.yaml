@@ -1,2 +1,11 @@
 server:
   port: 80
+
+spring:
+  cloud:
+    azure:
+      storage:
+        fileshare:
+          account-name: poc-sa-001
+          account-key:
+          endpoint:

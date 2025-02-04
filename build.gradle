@@ -2,8 +2,8 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.0'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.agilesolutions'
@@ -22,7 +22,7 @@ ext {
     commit = commit()
     branchName = branchName()
     // see https://spring.io/projects/spring-cloud
-    set('springCloudVersion', "2022.0.3")
+    set('springCloudVersion', "2023.0.1")
 }
 
 repositories {
@@ -33,14 +33,22 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'com.azure.spring:spring-cloud-azure-feature-management-web:5.13.0'
-    implementation 'com.azure.spring:spring-cloud-azure-appconfiguration-config-web:5.13.0'
-    implementation 'com.azure.spring:spring-cloud-azure-appconfiguration-config:5.13.0'
+    implementation 'com.azure.spring:spring-cloud-azure-feature-management-web'
+    implementation 'com.azure.spring:spring-cloud-azure-appconfiguration-config-web'
+    implementation 'com.azure.spring:spring-cloud-azure-appconfiguration-config'
+    implementation 'com.azure.spring:spring-cloud-azure-starter-storage-file-share'
     implementation 'org.slf4j:slf4j-api:2.0.13'
     implementation 'org.projectlombok:lombok:1.18.34'
     implementation 'com.microsoft.azure:applicationinsights-core:3.5.3'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.1"
+        mavenBom("com.azure.spring:spring-cloud-azure-dependencies:5.9.0")
+    }
 }
 
 test {

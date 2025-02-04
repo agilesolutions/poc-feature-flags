@@ -78,6 +78,11 @@ kubectl get nodes
 kubectl describe node
 kubectl top node aks-agentpool-14651446-vmss000000
 ```
+# create storage account with ARM template to test Spring Cloud shared files resource handling
+```
+az deployment group create --resource-group tks-cluster-template_rg001 --template-file storage-template.json --parameters storageAccountName=poc-sa-001
+```
+
 
 # Add managed Identity to access the AZ App Configuration configured above
 
@@ -155,10 +160,12 @@ spec:
 
 ```
 ### run pipeline to gradle build, docker build and push and kubectl apply deploy and service manifests
-- Test loadbalancer external IP endpionts
+- Test loadbalancer external IP endpoints
   - http://130.131.168.254/actuator/health
   - http://130.131.168.254/actuator/hello
   - http://130.131.168.254/actuator/newFeature
+  - curl http://130.131.168.254/file/file1.txt -d "new message" -H "Content-Type: text/plain"
+  - curl -XGET http://130.131.168.254/file/file1.txt
 ```
 kubectl logs -f -l app=feature-flags
 kubectl rollout history deployment/feature-flags-deployment
@@ -180,3 +187,4 @@ az group delete --name aks-cluster-template_rg001
 - [Use dynamic configuration in a Java Spring app](https://learn.microsoft.com/en-us/azure/azure-app-configuration/enable-dynamic-configuration-java-spring-app)
 - [Graceful Shutdown of Spring Boot Applications in Kubernetes](https://medium.com/trendyol-tech/graceful-shutdown-of-spring-boot-applications-in-kubernetes-f80e0b3a30b0)
 - [Spring Cloud Azure resource handling](https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/resource-handling)
+- [Reading and Writing Files Stored in Azure Files by Spring Resource Abstraction in Spring Boot Application](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/storage/spring-cloud-azure-starter-storage-file-share/storage-file-sample)
