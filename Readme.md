@@ -80,7 +80,7 @@ kubectl top node aks-agentpool-14651446-vmss000000
 ```
 # create and verify storage account and file share with ARM template to test Spring Cloud shared files resource handling
 ```
-az deployment group create --resource-group tks-cluster-template_rg001 --template-file storage-template.json --parameters storageAccountName=poc-sa-001 shareName=poc-file-share-001 quotaGB=100
+az deployment group create --resource-group tks-cluster-template_rg001 --template-file storage-template.json --parameters storageAccountName=poc-sa-001 shareName=poc-file-share-001 shareQuota=1
 az storage account list --resource-group tks-cluster-template_rg001
 az storage share list --account-name storageAccountName=poc-sa-001
 ```
