@@ -12,8 +12,8 @@ spec:
   template:
     metadata:
       # kubectl rollout history deployment/feature-flags-deployment
-      #annotations:
-      #  kubernetes.io/change-cause: "Updated image to $(Build.BuildId)"
+      annotations:
+        kubernetes.io/change-cause: "Updated image to #{VERSION}#"
       labels:
         app: feature-flags
     spec:

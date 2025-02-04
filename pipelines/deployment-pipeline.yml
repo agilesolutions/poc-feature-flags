@@ -74,6 +74,10 @@ stages:
           runOnce:
             deploy:
               steps:
+                steps:
+                - bash: 'sed -i -e ''s/#{VERSION}#/$(Build.BuildId)/g'' /manifests/Deployment-and-LoadBalancer-Service.yml'
+                  displayName: 'Replace versioning'
+
                 - task: KubernetesManifest@1
                   displayName: Create imagePullSecret
                   inputs:
