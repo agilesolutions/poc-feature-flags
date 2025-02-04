@@ -6,6 +6,7 @@ Implement Liveness and Readiness probes to gracefully shutting down Spring Boot 
 ## in this demo...
 - Demonstrating implementing feature flags on Spring Boot applications.
 - Integrate with App Configuration when you're using it to manage feature flags.
+- Implement feature flags to redirect REST API endpoint routes.
 - Azure CLI configuring feature flags on Azure App Configuration store.
 - ARM templates to booting up AKS cluster to deploying this demo.
 - Azure DevOps pipeline to gradle build and package, docker build and push and finally k8s deploy manifests to deploy app and AZ loadbalancer service.
