@@ -15,10 +15,10 @@ public class CustomHealthCheck extends AbstractHealthIndicator {
     @Override
     protected void doHealthCheck(Health.Builder health) {
         if (healthService.isHealthy()) {
-            log.info("health status switch to up");
+            //log.info("health status switch to up");
             health.up();
         } else {
-            log.info("health status switch to down");
+            //log.info("health status switch to down");
             health.down();
         }
     }
