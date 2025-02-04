@@ -1,5 +1,16 @@
-# Feature flags with Azure AKS and SpringBoot
-incorporate Azure App Configuration into a Spring Boot web app to create an end-to-end implementation of feature management.
+# Feature flags with Azure AKS and SpringBoot, Kubernetes Liveness and Readiness probes and more...
+Incorporate Azure App Configuration into a Spring Boot web app to create an end-to-end implementation of feature management. 
+Implement Liveness and Readiness probes to gracefully shutting down Spring Boot applications.
+
+
+## in this demo...
+- Demonstrating implementing feature flags on Spring Boot applications.
+- Integrate with App Configuration when you're using it to manage feature flags.
+- Azure CLI configuring feature flags on Azure App Configuration store.
+- ARM templates to booting up AKS cluster to deploying this demo.
+- Azure DevOps pipeline to gradle build and package, docker build and push and finally k8s deploy manifests to deploy app and AZ loadbalancer service.
+- Implement Liveness probess to gracefully shutting down Spring Boot by implementing custom health checking indicators.
+- More to follow
 
 # Prerequisites
 
