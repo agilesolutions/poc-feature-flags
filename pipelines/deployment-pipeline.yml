@@ -55,7 +55,7 @@ stages:
               repository: $(imageRepository)
               command: buildAndPush
               Dockerfile: Dockerfile
-              tags: $(tag)
+              tags: $(Build.BuildId)
 
           - publish: manifests
             artifact: manifests
@@ -96,4 +96,4 @@ stages:
                     kubernetesCluster: 'aks101cluster'
                     manifests: $(Pipeline.Workspace)/manifests/Deployment-and-LoadBalancer-Service.yml
                     imagePullSecrets: 'my-acr-secret'
-                    containers: $(imageRepository):$(tag)
+                    containers: $(imageRepository):$(Build.BuildId)

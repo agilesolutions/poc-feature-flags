@@ -1,9 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  # kubectl rollout history deployment/feature-flags-deployment
   name: feature-flags-deployment
   labels:
     app: feature-flags
+  annotations:
+    kubernetes.io/change-cause: "Updated image to $(Build.BuildId)"
 spec:
   replicas: 1
   selector:

@@ -61,7 +61,7 @@ az ts create --name clusterspec --version 1 --resource-group tks-cluster-templat
 
 ## Test cluster
 ```
-az aks get-credentials --resource-group aks-cluster-template_rg001 --name aks101cluster
+az aks get-credentials --resource-group aks-cluster-template_rg001 --name aks101cluster --overwrite-existing
 kubectl get nodes
 kubectl describe node
 kubectl top node aks-agentpool-14651446-vmss000000
