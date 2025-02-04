@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    azure:
-      appconfiguration:
-        stores[0]:
-          feature-flags:
-            enabled: 'true'
-          connection-string: 'https://poc-app-config001.azconfig.io;Id=DbLw;Secret=5PVQpWm5F8EkDVe9Txpb7SF1jaGYvq6J3L2V52vkgGLnTkNszvgVJQQJ99BAAC1i4TkC00z3AAABAZAC1F9H'

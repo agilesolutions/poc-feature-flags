@@ -11,6 +11,20 @@ az group create --name aks-cluster-template_rg001 --location centralus
 ```
 az appconfig create --name poc-app-config001 --resource-group aks-cluster-template_rg001 --location centralus --sku free
 ```
+
+## Create a feature flag, list, toggle on and off
+```
+az appconfig feature set --n poc-app-config001 --feature Beta
+az appconfig feature list -n poc-app-config001
+az appconfig feature enable -n poc-app-config001 --feature Beta
+az appconfig feature disable -n poc-app-config001 --feature Beta
+```
+
+## Display AZ app config connection string
+```
+az appconfig credential list --name poc-app-config001 --query "[?name=='Primary'].connectionString" --output tsv
+```
+
 ## Add Key-Value Pairs to App Configuration
 ```
 az appconfig kv set --name poc-app-config001 --key connection.string --value "xxx"
@@ -61,12 +75,6 @@ kubectl top node aks-agentpool-14651446-vmss000000
 - Scroll down to the Settings group in the left pane, and select Identity.
 - On the System assigned tab, switch Status to On and select Save.
 - When prompted, answer Yes to turn on the system-assigned managed identity
-
-
-## Create a feature flag
-```
-az appconfig feature set --name poc-feature-flag --feature Beta
-```
 
 ## Setup k8s manifests to mount AZ connection string vault into POD
 
