@@ -1,6 +1,6 @@
 # Feature flags with Azure AKS and SpringBoot, Kubernetes Liveness and Readiness probes and more...
 Incorporate Azure App Configuration into a Spring Boot web app to create an end-to-end implementation of feature management. 
-Implement Liveness and Readiness probes to gracefully shutting down Spring Boot applications.
+Implement Liveness and Readiness probes to gracefully shutting down Spring Boot applications. Azure dynamic configuration using push refresh in Spring Boot.
 
 
 ## in this demo...
@@ -11,7 +11,7 @@ Implement Liveness and Readiness probes to gracefully shutting down Spring Boot 
 - ARM templates to booting up AKS cluster to deploying this demo.
 - Azure DevOps pipeline to gradle build and package, docker build and push and finally k8s deploy manifests to deploy app and AZ loadbalancer service.
 - Implement Liveness probess to gracefully shutting down Spring Boot by implementing custom health checking indicators.
-- More to follow
+- Demonstrate Azure App config push and pull models.
 
 # Prerequisites
 
@@ -37,10 +37,10 @@ az appconfig feature disable -n poc-app-config001 --feature Beta
 az appconfig credential list --name poc-app-config001 --query "[?name=='Primary'].connectionString" --output tsv
 ```
 
-## Add Key-Value Pairs to App Configuration
+## Add Key-Value Pairs to App Configuration to test dynamic configuration on Spring Boot apps
 ```
-az appconfig kv set --name poc-app-config001 --key connection.string --value "xxx"
-az appconfig kv set --name poc-app-config001 --key feature.toggle --value "true"
+az appconfig kv set -n poc-app-config001 --key sentinel --value "1"
+az appconfig kv set -n poc-app-config001 --key /application/config.message --value "hello"
 ```
 ## Retrieve a Configuration Value
 ```

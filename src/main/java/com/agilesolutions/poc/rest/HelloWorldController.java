@@ -1,6 +1,8 @@
 package com.agilesolutions.poc.rest;
 
+import com.agilesolutions.poc.config.MessageProperties;
 import com.agilesolutions.poc.service.HealthService;
+import com.azure.spring.cloud.appconfiguration.config.AppConfigurationRefresh;
 import com.azure.spring.cloud.feature.management.FeatureManager;
 import com.azure.spring.cloud.feature.management.web.FeatureGate;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,10 @@ public class HelloWorldController {
     private final HealthService healthService;
 
     private final FeatureManager featureManager;
+
+    private final AppConfigurationRefresh refresh;
+
+    private final MessageProperties messageProperties;
 
     @Autowired(required = false)
     @Qualifier("podInfoLabels")
@@ -85,6 +91,15 @@ public class HelloWorldController {
         return format("old version enabled because Beta switch on = %s", featureManager.isEnabledAsync("Beta").block());
     }
 
+    @GetMapping("/getMessage")
+    public String getMessage() {
 
+        if (refresh != null) {
+            log.info("Refreshing message properties");
+            refresh.refreshConfigurations();
+        }
+
+        return format("New sentinel property value %s", messageProperties.getMessage());
+    }
 
 }
