@@ -70,7 +70,7 @@ public class HelloWorldController {
 
         healthService.healthy();
 
-        return format("Feature Beta {} switch on {}", featureManager.isEnabledAsync("Beta").block());
+        return format("Feature Beta switch on {}", featureManager.isEnabledAsync("Beta").block());
     }
 
     @GetMapping("/oldFeature")
