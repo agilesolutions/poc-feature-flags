@@ -1,6 +1,8 @@
 package com.agilesolutions.poc.rest;
 
 import com.agilesolutions.poc.service.HealthService;
+import com.azure.spring.cloud.feature.management.FeatureManager;
+import com.azure.spring.cloud.feature.management.web.FeatureGate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.Format;
 import java.util.Properties;
 
 import static java.lang.String.format;
@@ -19,6 +22,8 @@ public class HelloWorldController {
 
     private final HealthService healthService;
 
+    private final FeatureManager featureManager;
+
     @Autowired(required = false)
     @Qualifier("podInfoLabels")
     private Properties podInfoLabels;
@@ -28,9 +33,9 @@ public class HelloWorldController {
 
         String deploymentVersion = (String) podInfoLabels.get("app");
 
-        log.info("**** deployment {}",deploymentVersion);
+        log.info("**** deployment {} and Feature Beta switch on = ",deploymentVersion, featureManager.isEnabledAsync("Beta").block());
 
-        return format("Deployment version %s", deploymentVersion);
+        return format("Deployment version %s with Feature Beta switch on = %s", deploymentVersion, featureManager.isEnabledAsync("Beta").block());
     }
 
     @GetMapping("/unhealthy")
@@ -53,6 +58,19 @@ public class HelloWorldController {
         healthService.healthy();
 
         return format("status switch to healthy for pod version {}",(String) podInfoLabels.get("app"));
+    }
+
+    @FeatureGate(feature = "Beta")
+    @GetMapping("/newFeature")
+    public String newFeature() {
+
+
+        log.info("new Beta version is switch on {}", featureManager.isEnabledAsync("Beta").block());
+
+
+        healthService.healthy();
+
+        return format("Feature Beta {} switch on", featureManager.isEnabledAsync("Beta").block());
     }
 
 
