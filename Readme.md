@@ -145,9 +145,13 @@ spec:
 ### run pipeline to gradle build, docker build and push and kubectl apply deploy and service manifests
 - Test loadbalancer external IP endpionts
   - http://130.131.168.254/actuator/health
-  - 
+  - http://130.131.168.254/actuator/hello
+  - http://130.131.168.254/actuator/newFeature
 ```
-
+kubectl logs -f -l app=feature-flags
+kubectl rollout history deployment/feature-flags-deployment
+az appconfig feature enable -n poc-app-config001 --feature Beta
+az appconfig feature disable -n poc-app-config001 --feature Beta
 ```
 
 ## cleanup

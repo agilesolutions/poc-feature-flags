@@ -60,7 +60,7 @@ public class HelloWorldController {
         return format("status switch to healthy for pod version {}",(String) podInfoLabels.get("app"));
     }
 
-    @FeatureGate(feature = "Beta")
+    @FeatureGate(feature = "Beta", fallback = "/oldFeature")
     @GetMapping("/newFeature")
     public String newFeature() {
 
@@ -72,6 +72,19 @@ public class HelloWorldController {
 
         return format("Feature Beta {} switch on", featureManager.isEnabledAsync("Beta").block());
     }
+
+    @GetMapping("/oldFeature")
+    public String oldFeature() {
+
+
+        log.info("old version because Beta is switch on {}", featureManager.isEnabledAsync("Beta").block());
+
+
+        healthService.healthy();
+
+        return format("old version enabled because Beta switch on = {}", featureManager.isEnabledAsync("Beta").block());
+    }
+
 
 
 }
