@@ -33,7 +33,7 @@ public class HelloWorldController {
 
         String deploymentVersion = (String) podInfoLabels.get("app");
 
-        log.info("**** deployment {} and Feature Beta switch on = ",deploymentVersion, featureManager.isEnabledAsync("Beta").block());
+        log.info("**** deployment {} and Feature Beta switch on = {}",deploymentVersion, featureManager.isEnabledAsync("Beta").block());
 
         return format("Deployment version %s with Feature Beta switch on = %s", deploymentVersion, featureManager.isEnabledAsync("Beta").block());
     }
@@ -70,7 +70,7 @@ public class HelloWorldController {
 
         healthService.healthy();
 
-        return format("Feature Beta {} switch on", featureManager.isEnabledAsync("Beta").block());
+        return format("Feature Beta {} switch on {}", featureManager.isEnabledAsync("Beta").block());
     }
 
     @GetMapping("/oldFeature")
