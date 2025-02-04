@@ -97,3 +97,5 @@ stages:
                     manifests: $(Pipeline.Workspace)/manifests/Deployment-and-LoadBalancer-Service.yml
                     imagePullSecrets: 'my-acr-secret'
                     containers: $(imageRepository):$(Build.BuildId)
+                    arguments: >
+                      --type='merge' -p='{"spec": {"template": {"metadata": {"annotations": {"kubernetes.io/change-cause": "Updated to build $(Build.BuildId)"}}}}}'
