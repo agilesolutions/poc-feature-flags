@@ -6,7 +6,7 @@ spring:
           connection-string: 'Endpoint=https://poc-app-config001.azconfig.io;Id=zMiv;Secret=AfPS3ptqJQup9FiPYZSk4Qng6VhOsDjxKQ4uKTrhMALHfYtizLjaJQQJ99BBAC1i4TkC00z3AAACAZAC18L2'
           feature-flags:
             enabled: 'true'
-          monitoring.enabled:
+          monitoring:
             enabled: 'true'
             refresh-interval: 30s
             triggers[0]:
