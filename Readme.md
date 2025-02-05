@@ -1,4 +1,4 @@
-# Azure dynamic App Configuration and Feature flags with Azure AKS and SpringBoot, Kubernetes Liveness and Readiness probes and more...
+# Azure dynamic App Configuration and Feature flags with SpringBoot, SpringBoot resources to accessing Azure Storage services, and more
 This POC is about incorporating Azure App Configuration into a Spring Boot web app to create an end-to-end implementation of feature management and dynamic application configuration push and pull models. 
 Implementing Liveness and Readiness probes to gracefully shutting down Spring Boot applications. Integrating Azure Storage services (Blob and File) natively on Spring Boot. 
 
