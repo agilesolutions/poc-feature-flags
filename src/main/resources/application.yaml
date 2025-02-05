@@ -6,6 +6,6 @@ spring:
     azure:
       storage:
         fileshare:
-          account-name: poc-sa-001
-          account-key:
-          endpoint:
+          connection-string: "DefaultEndpointsProtocol=https;AccountName=<STORAGE_ACCOUNT_NAME>;AccountKey=<ACCOUNT_KEY>;EndpointSuffix=core.windows.net"
+          share-name: poc-file-share-001
+

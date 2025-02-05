@@ -52,7 +52,7 @@ az appconfig feature enable -n poc-app-config001 --feature Beta
 az appconfig feature disable -n poc-app-config001 --feature Beta
 ```
 
-## Display AZ app config connection string
+## Display AZ App Configuration connection string
 ```
 az appconfig credential list --name poc-app-config001 --query "[?name=='Primary'].connectionString" --output tsv
 ```
@@ -74,6 +74,18 @@ az deployment group create --resource-group tks-cluster-template_rg001 --templat
 az storage account list --resource-group tks-cluster-template_rg001
 az storage share list --account-name storageAccountName=poc-sa-001
 ```
+
+## Display AZ Storage Account connection string
+
+```
+az storage account show-connection-string --name poc-sa-001 --resource-group tks-cluster-template_rg001 --query connectionString --output tsv
+```
+This will return a connection string in the format you see here:
+```
+DefaultEndpointsProtocol=https;AccountName=<STORAGE_ACCOUNT_NAME>;AccountKey=<ACCOUNT_KEY>;EndpointSuffix=core.windows.net
+```
+Configure the full string on application.yml.
+
 ## Build and Deploy SpringBoot app 
 run ADO pipeline to gradle build, docker build and push and finally deploy a POD onto AKS cluster.
 - Test loadbalancer external IP endpoints
