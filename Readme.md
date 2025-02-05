@@ -57,7 +57,7 @@ az appconfig feature disable -n poc-app-config001 --feature Beta
 az appconfig credential list --name poc-app-config001 --query "[?name=='Primary'].connectionString" --output tsv
 ```
 
-## Add Key-Value Pairs to App Configuration to test dynamic push configuration on Spring Boot apps
+## Add Key-Value Pairs to test dynamic App Configuration
 ```
 az appconfig kv set -n poc-app-config001 --key sentinel --value "1"
 az appconfig kv set -n poc-app-config001 --key /application/config.message --value "hello"
@@ -68,7 +68,7 @@ az appconfig kv set -n poc-app-config001 --key /application/config.message --val
 az appconfig kv show --name poc-app-config001 --key connection.string
 ```
 
-## Setup and verify AZ Storage Account and File Share with ARM template to POC test Spring Cloud shared files resource handling
+## Setup and verify AZ Storage Account and File Share with ARM template
 ```
 az deployment group create --resource-group tks-cluster-template_rg001 --template-file storage-template.json --parameters storageAccountName=poc-sa-001 shareName=poc-file-share-001 shareQuota=1
 az storage account list --resource-group tks-cluster-template_rg001
@@ -76,7 +76,6 @@ az storage share list --account-name storageAccountName=poc-sa-001
 ```
 
 ## Display AZ Storage Account connection string
-
 ```
 az storage account show-connection-string --name poc-sa-001 --resource-group tks-cluster-template_rg001 --query connectionString --output tsv
 ```
