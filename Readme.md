@@ -68,13 +68,14 @@ az appconfig kv set -n poc-app-config001 --key /application/config.message --val
 az appconfig kv show --name poc-app-config001 --key connection.string
 ```
 
-# Setup and verify AZ Storage Account and File Share with ARM template to POC test Spring Cloud shared files resource handling
+## Setup and verify AZ Storage Account and File Share with ARM template to POC test Spring Cloud shared files resource handling
 ```
 az deployment group create --resource-group tks-cluster-template_rg001 --template-file storage-template.json --parameters storageAccountName=poc-sa-001 shareName=poc-file-share-001 shareQuota=1
 az storage account list --resource-group tks-cluster-template_rg001
 az storage share list --account-name storageAccountName=poc-sa-001
 ```
-### run ADO pipeline to gradle build, docker build and push and kubectl deploy k8s POD and Service
+## Build and Deploy SpringBoot app 
+run ADO pipeline to gradle build, docker build and push and finally deploy a POD onto AKS cluster.
 - Test loadbalancer external IP endpoints
   - http://130.131.168.254/actuator/health
   - http://130.131.168.254/actuator/hello
