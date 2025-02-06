@@ -20,7 +20,8 @@ stages:
     jobs:
       - job: Stage3_Job1
         steps:
+          - checkout: none
           - script: |
               echo "SAS token: ${{ parameters.SASToken }}"
-              echo $(vmSku)
+              echo "Expected SKU = $(vmSku)"
             displayName: "Print SAS token"
