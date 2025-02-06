@@ -53,5 +53,5 @@ stages:
             name: Stage2_Job1_Script1
   - template: templates/template.yml
     parameters:
-      token: $[stageDependencies.Stage1.Stage1_Job1.outputs['Stage1_Job1_Script1.SASToken']]
+      SASToken: $[stageDependencies.Stage1.Stage1_Job1.outputs['Stage1_Job1_Script1.SASToken']]
       environment: ${{ parameters.environment }}
