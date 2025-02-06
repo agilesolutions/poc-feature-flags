@@ -1,9 +1,9 @@
 # template.yml
 parameters:
-  - name: token
+  - name: SASToken
     type: string
     default: "NA"
 
 steps:
-  - script: echo SAS token: ${{ parameters.token }}
+  - script: echo "SAS token: ${{ parameters.SASToken }}"
     displayName: "Print SAS token"
