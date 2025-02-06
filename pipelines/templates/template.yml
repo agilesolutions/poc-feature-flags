@@ -9,6 +9,7 @@ parameters:
 
 stages:
   - stage: Deploy_${{ parameters.environment }}
+    dependsOn: [] # Runs in parallel
     variables:
       ${{ if eq(parameters.environment, 'dev' ) }}:
         vmSku: B2s

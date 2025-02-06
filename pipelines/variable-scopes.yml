@@ -55,8 +55,6 @@ stages:
             name: Stage2_Job1_Script1
   - ${{ each env in parameters.environments }}:
       - template: templates/template.yml
-        displayName: "Deploy to ${{ env}}"
-        dependsOn: [] # Runs in parallel
         parameters:
           environment: ${{ env }}
           SASToken: $[ stageDependencies.Stage1.Stage1_Job1.outputs['Stage1_Job1_Script1.SASToken'] ]
