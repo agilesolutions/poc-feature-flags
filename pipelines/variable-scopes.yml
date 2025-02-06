@@ -5,6 +5,16 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+parameters:
+  - name: environment
+    displayName: Environment Name
+    type: string
+    default: 'dev'
+    values:
+      - dev
+      - qa
+      - prod
+
 stages:
   - stage: Stage1
     jobs:
@@ -44,3 +54,4 @@ stages:
           - template: templates/template.yml
             parameters:
               token: $(NewSASToken)
+              environment: ${{ parameters.environment }}

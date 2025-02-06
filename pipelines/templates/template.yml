@@ -3,7 +3,20 @@ parameters:
   - name: SASToken
     type: string
     default: "NA"
+  - name: environment
+    type: string
+    default: 'dev'
+
+variables:
+  ${{ if eq(parameters.environment, 'dev' ) }}:
+    vmSku: B2s
+  ${{ if eq(parameters.environment, 'qa' ) }}:
+    vmSku: B2ms
+  ${{ if eq(parameters.environment, 'prod' ) }}:
+    vmSku: B4ms
 
 steps:
-  - script: echo "SAS token: ${{ parameters.SASToken }}"
+  - script: |
+      echo "SAS token: ${{ parameters.SASToken }}"
+      echo $(vmSku)
     displayName: "Print SAS token"
