@@ -6,14 +6,9 @@ pool:
   vmImage: ubuntu-latest
 
 parameters:
-  - name: environment
-    displayName: Environment Name
-    type: string
-    default: 'dev'
-    values:
-      - dev
-      - qa
-      - prod
+  - name: environments
+    type: object
+    default: ["dev", "qa", "prod"]
 
 stages:
   - stage: Stage1
@@ -51,7 +46,8 @@ stages:
               echo "The value of SASToken in Stage2: $(NewSASToken)"
             displayName: Stage2_Job1_Script1
             name: Stage2_Job1_Script1
-  - template: templates/template.yml
-    parameters:
-      SASToken: $[ stageDependencies.Stage1.Stage1_Job1.outputs['Stage1_Job1_Script1.SASToken'] ]
-      environment: ${{ parameters.environment }}
+  - ${{ each env in parameters.environments }}:
+      - template: templates/template.yml
+        parameters:
+          environment: ${{ env }}
+          SASToken: $[ stageDependencies.Stage1.Stage1_Job1.outputs['Stage1_Job1_Script1.SASToken'] ]
