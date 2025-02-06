@@ -7,16 +7,20 @@ parameters:
     type: string
     default: 'dev'
 
-variables:
-  ${{ if eq(parameters.environment, 'dev' ) }}:
-    vmSku: B2s
-  ${{ if eq(parameters.environment, 'qa' ) }}:
-    vmSku: B2ms
-  ${{ if eq(parameters.environment, 'prod' ) }}:
-    vmSku: B4ms
+stages:
+  - stage: Stage3
+    variables:
+      ${{ if eq(parameters.environment, 'dev' ) }}:
+        vmSku: B2s
+      ${{ if eq(parameters.environment, 'qa' ) }}:
+        vmSku: B2ms
+      ${{ if eq(parameters.environment, 'prod' ) }}:
+        vmSku: B4ms
 
-steps:
-  - script: |
-      echo "SAS token: ${{ parameters.SASToken }}"
-      echo $(vmSku)
-    displayName: "Print SAS token"
+    jobs:
+      - job: Stage3_Job1
+        steps:
+          - script: |
+              echo "SAS token: ${{ parameters.SASToken }}"
+              echo $(vmSku)
+            displayName: "Print SAS token"
