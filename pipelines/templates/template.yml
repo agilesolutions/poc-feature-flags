@@ -8,7 +8,7 @@ parameters:
     default: 'dev'
 
 stages:
-  - stage: Stage3
+  - stage: Deploy_${{ parameters.environment }}
     variables:
       ${{ if eq(parameters.environment, 'dev' ) }}:
         vmSku: B2s
@@ -18,10 +18,11 @@ stages:
         vmSku: B4ms
 
     jobs:
-      - job: Stage3_Job1
+      - job: Deploy_${{ parameters.environment }}_Job
         steps:
           - checkout: none
           - script: |
               echo "SAS token: ${{ parameters.SASToken }}"
               echo "Expected SKU = $(vmSku)"
+              echo "Deploying to ${{ parameters.environment }}"
             displayName: "Print SAS token"
