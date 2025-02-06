@@ -6,6 +6,9 @@ parameters:
   - name: environment
     type: string
     default: 'dev'
+  - name: dependentStage
+    type: string
+    default: 'Stage2'
 
 stages:
   - stage: Deploy_${{ parameters.environment }}
