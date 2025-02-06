@@ -41,6 +41,6 @@ stages:
               echo "The value of SASToken in Stage2: $(NewSASToken)"
             displayName: Stage2_Job1_Script1
             name: Stage2_Job1_Script1
-      - template: templates/template.yml
-        parameters:
-          token: $(NewSASToken)
+          - template: templates/template.yml
+            parameters:
+              token: $(NewSASToken)
