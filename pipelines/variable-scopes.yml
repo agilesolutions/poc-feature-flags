@@ -20,6 +20,13 @@ stages:
             displayName: Stage1_Job1_Script1
             name: Stage1_Job1_Script1
           - script: |
+              echo $(Stage1_Job1_Script1.SASToken) > output.txt
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: output.txt
+              artifactName: outputArtifact
+            displayName: "Publish SAS token as Artifact"
+          - script: |
               echo "The value of SASToken: $(Stage1_Job1_Script1.SASToken)"
             displayName: Stage1_Job1_Script2
             name: Stage1_Job1_Script2

@@ -21,7 +21,17 @@ stages:
       - job: Deploy_${{ parameters.environment }}_Job
         steps:
           - checkout: none
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              artifactName: outputArtifact
+              downloadPath: $(Pipeline.Workspace)
+            displayName: "Download Output Artifact"
           - script: |
+              value=$(cat $(Pipeline.Workspace)/outputArtifact/output.txt)
+              echo "##vso[task.setvariable variable=restoredValue]$value"
+            displayName: "Read and Set Variable"
+          - script: |
+              echo "Restored Variable: $(restoredValue)"
               echo "SAS token: ${{ parameters.SASToken }}"
               echo "Expected SKU = $(vmSku)"
               echo "Deploying to ${{ parameters.environment }}"
