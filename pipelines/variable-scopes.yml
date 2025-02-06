@@ -1,0 +1,12 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Stage1
+    jobs:
+      - job: Build
+        steps:
+          - script: echo "dd"
