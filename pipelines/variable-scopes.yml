@@ -23,7 +23,19 @@ stages:
           - name: NewSASToken
             value: $[dependencies.Stage1_Job1.outputs['Stage1_Job1_Script1.SASToken']]
         steps:
+          - checkout: none
           - script: |
               echo "The value of SASToken is $(NewSASToken)"
             displayName: Stage1_Job2_Script1
             name: Stage1_Job2_Script1
+  - stage: Stage2
+    variables:
+      - name: NewSASToken
+        value: $[stageDependencies.Stage1.Stage1_Job1.outputs['Stage1_Job1_Script1.SASToken']]
+    jobs:
+      - job: Stage2_Job1
+        steps:
+          - script: |
+              echo "The value of SASToken in Stage2: $(NewSASToken)"
+            displayName: Stage2_Job1_Script1
+            name: Stage2_Job1_Script1
