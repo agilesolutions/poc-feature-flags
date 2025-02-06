@@ -1,0 +1,11 @@
+# template.yml
+parameters:
+  - name: token
+    type: string
+    default: "NA"
+
+jobs:
+  - job: TemplateJob
+    steps:
+      - script: echo "Message: ${{ parameters.token }}"
+        displayName: "Print SAS token"
