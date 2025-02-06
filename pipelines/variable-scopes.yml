@@ -35,6 +35,7 @@ stages:
     jobs:
       - job: Stage2_Job1
         steps:
+          - checkout: none
           - script: |
               echo "The value of SASToken in Stage2: $(NewSASToken)"
             displayName: Stage2_Job1_Script1
