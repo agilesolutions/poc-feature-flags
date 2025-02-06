@@ -7,6 +7,13 @@ pool:
 stages:
   - stage: Stage1
     jobs:
-      - job: Build
+      - job: Stage1_Job1
         steps:
-          - script: echo "dd"
+          - script: |
+              echo "##vso[task.setvariable variable=SASToken;isOutput=true]SASTokenValue"
+            displayName: Stage1-Job1-Script1
+            name: Stage1-Job1-Script1
+          - script: |
+              echo "The value of SASToken: $(Stage1_Job1_Script1.SASToken)"
+            displayName: Stage1-Job1-Script2
+            name: Stage1-Job1-Script2
