@@ -6,13 +6,13 @@ parameters:
   - name: environment
     type: string
     default: 'dev'
-  - name: dependentStage
+  - name: dependingStage
     type: string
     default: 'Stage2'
 
 stages:
   - stage: Deploy_${{ parameters.environment }}
-    dependsOn: [] # Runs in parallel
+    dependsOn: [${{ parameters.dependingStage }}] # Runs in parallel
     variables:
       ${{ if eq(parameters.environment, 'dev' ) }}:
         vmSku: B2s
